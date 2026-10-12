@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ni.edu.uam.practicahilos.ProcesadorController"
+      alignment="TOP_CENTER" spacing="14" prefWidth="820" prefHeight="620">
+    <padding>
+        <Insets top="22" right="24" bottom="22" left="24"/>
+    </padding>
+
+    <Label text="NicaData Solutions S.A."
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Monitor de procesamiento concurrente"
+           style="-fx-font-size: 14px;"/>
+
+    <TabPane prefWidth="770" prefHeight="500" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+            <Tab text="Práctica guiada">
+                <content>
+                    <VBox alignment="CENTER" spacing="22">
+                        <padding>
+                            <Insets top="30" right="28" bottom="28" left="28"/>
+                        </padding>
+                        <Label text="Procesador de registros de clientes"
+                               style="-fx-font-size: 19px; -fx-font-weight: bold;"/>
+                        <Label fx:id="lblEstado" text="Esperando inicio" wrapText="true"/>
+                        <ProgressBar fx:id="barraProgreso" progress="0" prefWidth="600" maxWidth="600"/>
+                        <Label fx:id="lblPorcentaje" text="0% (0/100)"/>
+                        <HBox alignment="CENTER" spacing="12">
+                            <Button fx:id="btnIniciar" text="Iniciar" onAction="#iniciarProceso" prefWidth="110"/>
+                            <Button fx:id="btnDetener" text="Detener" onAction="#detenerProceso" disable="true" prefWidth="110"/>
+                            <Button fx:id="btnReiniciar" text="Reiniciar" onAction="#reiniciarProceso" prefWidth="110"/>
+                        </HBox>
+                        <Separator/>
+                        <Label text="100 registros · 100 ms por registro · aproximadamente 10 segundos"
+                               wrapText="true"/>
+                    </VBox>
+                </content>
+            </Tab>
+
+            <Tab text="Reto final: concurrencia">
+                <content>
+                    <VBox spacing="18">
+                        <padding>
+                            <Insets top="24" right="28" bottom="22" left="28"/>
+                        </padding>
+                        <Label text="Monitor de procesos empresariales"
+                               style="-fx-font-size: 19px; -fx-font-weight: bold;"/>
+                        <Label text="Los dos procesos se ejecutan simultáneamente en hilos independientes." wrapText="true"/>
+
+                        <VBox spacing="9">
+                            <Label text="Clientes — 100 registros"
+                                   style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+                            <ProgressBar fx:id="barraClientes" progress="0" maxWidth="Infinity"/>
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label fx:id="lblPorcentajeClientes" text="0% (0/100)" minWidth="100"/>
+                                <Label fx:id="lblEstadoClientes" text="Esperando inicio" wrapText="true" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="btnDetenerClientes" text="Detener clientes" onAction="#detenerClientes" disable="true"/>
+                            </HBox>
+                        </VBox>
+
+                        <Separator/>
+
+                        <VBox spacing="9">
+                            <Label text="Productos — 50 registros"
+                                   style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+                            <ProgressBar fx:id="barraProductos" progress="0" maxWidth="Infinity"/>
+                            <HBox alignment="CENTER_LEFT" spacing="12">
+                                <Label fx:id="lblPorcentajeProductos" text="0% (0/50)" minWidth="100"/>
+                                <Label fx:id="lblEstadoProductos" text="Esperando inicio" wrapText="true" HBox.hgrow="ALWAYS"/>
+                                <Button fx:id="btnDetenerProductos" text="Detener productos" onAction="#detenerProductos" disable="true"/>
+                            </HBox>
+                        </VBox>
+
+                        <Separator/>
+                        <HBox alignment="CENTER" spacing="12">
+                            <Button fx:id="btnSimularReto" text="Simular ambos procesos" onAction="#simularReto" prefWidth="190"/>
+                            <Button fx:id="btnReiniciarReto" text="Reiniciar" onAction="#reiniciarReto" prefWidth="110"/>
+                        </HBox>
+                        <Label text="Clientes: 70 ms por registro. Productos: 160 ms por registro. Cada proceso se puede detener por separado."
+                               wrapText="true"/>
+                    </VBox>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
+</VBox>
